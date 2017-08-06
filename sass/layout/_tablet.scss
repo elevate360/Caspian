@@ -1,0 +1,43 @@
+@media (min-width: 782px) {
+
+	@import "../navigation/menus-desktop";
+
+	.page-header,
+	.entry-title,
+	.entry-meta,
+	.entry-media,
+	.entry-content,
+	.entry-summary,
+	.entry-footer,
+	.author-info,
+	.comments-area,
+	.not-found {
+		max-width: 720px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.comment-form-author,
+	.comment-form-email,
+	.comment-form-url {
+		@include span( 4 of 12 );
+	}
+
+	.comment-form-url {
+		@include last;
+	}
+
+	.form-submit {
+		clear: both;
+		input[type="submit"] {
+			width: auto;
+		}
+	}
+
+	#secondary {
+		.widget {
+			width: 50%;
+		}
+	}
+
+}

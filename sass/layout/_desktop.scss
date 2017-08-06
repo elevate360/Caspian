@@ -1,0 +1,54 @@
+@media (min-width: 992px) {
+
+	.has-header-image .site-header {
+		height: 75vh;
+	}
+
+    .has-header-image:not(.has-header-video) .wp-custom-header {
+    	animation: fadein 2.5s ease-out backwards;
+    }
+
+	.wrap {
+		max-width: 960px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.entry-media,
+	.post-thumbnail {
+		max-width: 960px;
+	}
+
+	.entry-title {
+		@include font-size(2);
+	}
+
+	#secondary {
+		.widget {
+			width: 33.33%;
+		}
+	}
+
+}
+
+@media (min-width: 1200px) {
+
+	.wrap,
+	.nav-links {
+		max-width: 1140px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.entry-media,
+	.post-thumbnail {
+		max-width: 1280px;
+	}
+
+	#secondary {
+		.widget {
+			width: 25%;
+		}
+	}
+
+}
