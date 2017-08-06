@@ -162,12 +162,13 @@
 		margin-bottom: .5rem;
 		text-transform: uppercase;
 	}
-	.required {
-		color: #f44336;
-	}
 	input {
 		width: 100%;
 	}
+}
+
+label .required {
+	color: $color__text-require;
 }
 
 .form-submit input[type="submit"] {

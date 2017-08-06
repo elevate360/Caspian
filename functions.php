@@ -214,6 +214,8 @@ add_filter( 'wp_resource_hints', 'caspian_resource_hints', 10, 2 );
  */
 function caspian_scripts() {
 
+	wp_dequeue_style( 'contact-form-7' );
+
 	// Add custom fonts, used in the main stylesheet.
 	if ( ! class_exists( 'Easy_Google_Fonts' ) ) {
 		wp_enqueue_style( 'caspian-fonts', caspian_fonts_url(), array(), null );

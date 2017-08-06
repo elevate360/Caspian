@@ -19,6 +19,7 @@ $color__link-hover: #e64a19;
 $color__text-main: #404040;
 $color__text-secondary: #707070;
 $color__text-tertiary: #A0A0A0;
+$color__text-require: #f44336;
 
 // Button
 $color__button: $color__link;
@@ -28,3 +29,6 @@ $color__border-button-hover: #ccc #bbb #aaa;
 $color__border-button-focus: #aaa #bbb #bbb;
 $color__border-input: #cfd8dc;
 $color__border-abbr: #666;
+
+$color__background-message: #16a085;
+$color__background-error: #e74c3c;

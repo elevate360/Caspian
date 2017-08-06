@@ -1913,12 +1913,12 @@ h2.about-author {
 	text-transform: uppercase;
 }
 
-.comment-form .required {
-	color: #f44336;
-}
-
 .comment-form input {
 	width: 100%;
+}
+
+label .required {
+	color: #f44336;
 }
 
 .form-submit input[type="submit"] {
@@ -2948,6 +2948,120 @@ p.comment-subscription-form {
 /*--------------------------------------------------------------
 ## Contact Form 7
 --------------------------------------------------------------*/
+
+.wpcf7 {
+	margin: 0;
+	padding: 0;
+}
+
+.wpcf7 label {
+	display: block;
+}
+
+.wpcf7-response-output {
+	margin: 2em 0.5em 1em;
+	padding: 0.2em 1em;
+}
+
+.wpcf7 .screen-reader-response {
+	overflow: hidden;
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.wpcf7-mail-sent-ok,
+.wpcf7-mail-sent-ng,
+.wpcf7-spam-blocked,
+.wpcf7-validation-errors {
+	overflow: hidden;
+	position: relative;
+	width: auto;
+	margin: 0 0 1.5em;
+	padding: 1rem;
+	color: #fff;
+	background-color: #e74c3c;
+	list-style-type: none;
+}
+
+.wpcf7-mail-sent-ok {
+	background-color: #16a085;
+}
+
+.wpcf7-form-control-wrap {
+	position: relative;
+}
+
+span.wpcf7-not-valid-tip {
+	display: block;
+	color: #f00;
+	font-size: 1em;
+}
+
+.use-floating-validation-tip span.wpcf7-not-valid-tip {
+	position: absolute;
+	z-index: 100;
+	top: 20%;
+	left: 20%;
+	padding: 0.2em 0.8em;
+	border: 1px solid #f00;
+	background: #fff;
+}
+
+span.wpcf7-list-item {
+	display: block;
+	margin-bottom: 0.5rem;
+}
+
+.wpcf7-file {
+	width: 100%;
+	padding: 0.5rem;
+	background-color: rgba(0, 0, 0, 0.05);
+}
+
+.wpcf7-list-item-label {
+	margin-left: 0.5rem;
+}
+
+.wpcf7-display-none {
+	display: none;
+}
+
+.wpcf7 .ajax-loader {
+	display: inline-block;
+	visibility: hidden;
+	width: 16px;
+	height: 16px;
+	margin: 0 0 0 4px;
+	padding: 0;
+	border: none;
+	background-image: url("assets/images/ajax-loader.gif");
+	vertical-align: middle;
+}
+
+.wpcf7 .ajax-loader.is-active {
+	visibility: visible;
+}
+
+.wpcf7 .ajax-error {
+	display: none;
+}
+
+.wpcf7 .placeheld {
+	color: #888;
+}
+
+.wpcf7-recaptcha {
+	margin-bottom: 1.5rem;
+}
+
+.wpcf7-recaptcha iframe {
+	margin-bottom: 0;
+}
 
 
 /*--------------------------------------------------------------
