@@ -31,9 +31,9 @@
 			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
 		endif;
 
-		if ( ! is_singular() && ! post_password_required() ) {
-			$gallery = get_post_gallery( get_the_ID(), false );
-			$ids = explode( ",", $gallery['ids'] );
+		$gallery = get_post_gallery( get_the_ID(), false );
+		$ids = explode( ",", $gallery['ids'] );
+		if ( ! is_singular() && ! post_password_required() && !empty( $gallery ) ) {
 			echo '<div class="entry-media">';
 				echo '<div id="gallery-'. get_the_id() .'" class="entry-gallery">';
 				foreach( $ids as $id ) {
