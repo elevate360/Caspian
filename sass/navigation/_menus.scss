@@ -131,15 +131,16 @@
 		ul {
 			background-color: rgba( 0,0,0,.5 );
 			border-top: 1px solid rgba( 255,255,255,.1 );
+			a {
+				@include font-size(0.875);
+			}
 		}
 	}
 
 	a {
 		color: #fff;
 		display: block;
-		@include font-size(0.875);
 		font-weight: bold;
-		line-height: 1.7143;
 		padding: 1em;
 		text-decoration: none;
 		text-transform: uppercase;

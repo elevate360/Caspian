@@ -801,15 +801,17 @@ a:active {
 	background-color: rgba(0, 0, 0, 0.5);
 }
 
+.main-navigation ul ul a {
+	font-size: 14px;
+	font-size: 0.875rem;
+}
+
 .main-navigation a {
 	display: block;
 	padding: 1em;
 	opacity: 0.75;
 	color: #fff;
-	font-size: 14px;
-	font-size: 0.875rem;
 	font-weight: bold;
-	line-height: 1.7143;
 	text-decoration: none;
 	text-transform: uppercase;
 }

@@ -160,6 +160,23 @@
 		} );
 	} );
 
+	api( 'primary_color', function( value ){
+		value.bind( function( to ) {
+			$( '#primary-color' ).text(
+				CaspianCustomizerl10n.primary_color_background + '{background-color:'+ to +'}' +
+				CaspianCustomizerl10n.primary_color_border + '{border-color:'+ to +'}' +
+				CaspianCustomizerl10n.primary_color_text + '{color:'+ to +'}' );
+		} );
+	} );
+
+	api( 'secondary_color', function( value ){
+		value.bind( function( to ) {
+			$( '#secondary-color' ).text(
+				CaspianCustomizerl10n.secondary_color_background + '{background-color:'+ to +'}' +
+				CaspianCustomizerl10n.secondary_color_text + '{color:'+ to +'}' );
+		} );
+	} );
+
 
 	api.selectiveRefresh.bind( 'partial-content-rendered', function( placement ) {
 

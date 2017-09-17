@@ -10,6 +10,17 @@
  */
 function caspian_customize_preview_js() {
 	wp_enqueue_script( 'caspian_customizer', get_template_directory_uri() . '/assets/js/customizer.min.js', array( 'customize-preview', 'customize-selective-refresh' ), '20151215', true );
+
+	$css_selector = caspian_css_color_selector();
+	$output = array(
+		'primary_color_background' 			=> $css_selector['primary_color_background'],
+		'primary_color_border' 				=> $css_selector['primary_color_border'],
+		'primary_color_text' 				=> $css_selector['primary_color_text'],
+		'secondary_color_background' 		=> $css_selector['secondary_color_background'],
+		'secondary_color_text' 				=> $css_selector['secondary_color_text'],
+	);
+	wp_localize_script( 'caspian_customizer', 'CaspianCustomizerl10n', $output );
+
 }
 add_action( 'customize_preview_init', 'caspian_customize_preview_js' );
 
@@ -32,6 +43,83 @@ function caspian_setting_default(){
 	);
 
 	return apply_filters( 'caspian_setting_default', $settings );
+}
+
+/**
+ * [caspian_css_color_selector description]
+ * @return [type] [description]
+ */
+function caspian_css_color_selector(){
+
+	$caspian_css_color_selector = array(
+		'primary_color_background'	=> '
+			button,
+			input[type="button"],
+			input[type="reset"],
+			input[type="submit"],
+			.screen-reader-text:focus,
+			.comment-body > .reply a:hover,
+			.comment-body > .reply a:focus,
+			#cancel-comment-reply-link:hover,
+			#cancel-comment-reply-link:focus,
+			.widget_tag_cloud a:hover,
+			.widget_tag_cloud a:focus,
+			.instagram-follow-link a:hover,
+			.instagram-follow-link a:focus,
+			.return-to-top:hover,
+			.return-to-top:focus
+		',
+		'primary_color_border'		=> '
+			.comment-body > .reply a:hover,
+			.comment-body > .reply a:focus,
+			.page-numbers:hover:not(.current),
+			.page-numbers:focus:not(.current),
+			.widget_tag_cloud a:hover,
+			.widget_tag_cloud a:focus,
+			.instagram-follow-link a:hover,
+			.instagram-follow-link a:focus,
+			.return-to-top:hover,
+			.return-to-top:focus
+		',
+		'primary_color_text'		=> '
+			a,
+			.entry-meta a:hover,
+			.entry-meta a:focus,
+			.entry-title a:hover,
+			.entry-title a:focus,
+			.entry-footer a:hover,
+			.entry-footer a:focus,
+			.author-title a:hover,
+			.author-title a:focus,
+			.comment-meta a:hover,
+			.comment-meta a:focus,
+			.social-navigation a:hover,
+			.social-navigation a:focus
+		',
+
+		'secondary_color_background'	=> '
+			button:hover,
+			button:active,
+			button:focus,
+			input[type="button"]:hover,
+			input[type="button"]:active,
+			input[type="button"]:focus,
+			input[type="reset"]:hover,
+			input[type="reset"]:active,
+			input[type="reset"]:focus,
+			input[type="submit"]:hover,
+			input[type="submit"]:active,
+			input[type="submit"]:focus
+		',
+		'secondary_color_text'	=> '
+			a:hover,
+			a:focus
+		',
+
+	);
+
+
+	return apply_filters( 'caspian_css_color_selector', $caspian_css_color_selector );
 }
 
 /**

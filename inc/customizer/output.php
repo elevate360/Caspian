@@ -12,88 +12,25 @@
  */
 function caspian_add_inline_style(){
 
-	$setting = caspian_setting_default();
-	$primary_color 			= get_theme_mod( 'primary_color', $setting['primary_color'] );
-	$secondary_color 		= get_theme_mod( 'secondary_color', $setting['secondary_color'] );
+	$setting 			= caspian_setting_default();
+
+	$css_selector 		= caspian_css_color_selector();
+
+	$primary_color 		= get_theme_mod( 'primary_color', $setting['primary_color'] );
+	$secondary_color 	= get_theme_mod( 'secondary_color', $setting['secondary_color'] );
 
 	$css= '';
 
-	$primary_color_background_color = '
-		button,
-		input[type="button"],
-		input[type="reset"],
-		input[type="submit"],
-		.screen-reader-text:focus,
-		.comment-body > .reply a:hover,
-		.comment-body > .reply a:focus,
-		#cancel-comment-reply-link:hover,
-		#cancel-comment-reply-link:focus,
-		.widget_tag_cloud a:hover,
-		.widget_tag_cloud a:focus,
-		.instagram-follow-link a:hover,
-		.instagram-follow-link a:focus,
-		.return-to-top:hover,
-		.return-to-top:focus
-	';
-
-	$primary_color_text_color = '
-		a,
-		.entry-meta a:hover,
-		.entry-meta a:focus,
-		.entry-title a:hover,
-		.entry-title a:focus,
-		.entry-footer a:hover,
-		.entry-footer a:focus,
-		.author-title a:hover,
-		.author-title a:focus,
-		.comment-meta a:hover,
-		.comment-meta a:focus,
-		.social-navigation a:hover,
-		.social-navigation a:focus
-	';
-
-	$primary_color_border_color = '
-		.comment-body > .reply a:hover,
-		.comment-body > .reply a:focus,
-		.page-numbers:hover:not(.current),
-		.page-numbers:focus:not(.current),
-		.widget_tag_cloud a:hover,
-		.widget_tag_cloud a:focus,
-		.instagram-follow-link a:hover,
-		.instagram-follow-link a:focus,
-		.return-to-top:hover,
-		.return-to-top:focus
-	';
-
 	if ( $primary_color ) {
-		$css .= sprintf( '%s{ background-color: %s }', $primary_color_background_color, esc_attr( $primary_color ) );
-		$css .= sprintf( '%s{ color: %s }', $primary_color_text_color, esc_attr( $primary_color ) );
-		$css .= sprintf( '%s{ border-color: %s }', $primary_color_border_color, esc_attr( $primary_color ) );
+		$css .= sprintf( '%s{ background-color: %s }', $css_selector['primary_color_background'], esc_attr( $primary_color ) );
+		$css .= sprintf( '%s{ border-color: %s }', $css_selector['primary_color_border'], esc_attr( $primary_color ) );
+		$css .= sprintf( '%s{ color: %s }', $css_selector['primary_color_text'], esc_attr( $primary_color ) );
 		$css .= sprintf( '::selection{background-color:%1$s}::-moz-selection{background-color:%1$s}', esc_attr( $primary_color ) );
 	}
 
-	$secondary_color_background_color = '
-		button:hover,
-		button:active,
-		button:focus,
-		input[type="button"]:hover,
-		input[type="button"]:active,
-		input[type="button"]:focus,
-		input[type="reset"]:hover,
-		input[type="reset"]:active,
-		input[type="reset"]:focus,
-		input[type="submit"]:hover,
-		input[type="submit"]:active,
-		input[type="submit"]:focus
-	';
-	$secondary_color_text_color = '
-		a:hover,
-		a:focus
-	';
-
 	if ( $secondary_color ) {
-		$css .= sprintf( '%s{ background-color: %s }', $secondary_color_background_color, esc_attr( $secondary_color ) );
-		$css .= sprintf( '%s{ color: %s }', $secondary_color_text_color, esc_attr( $secondary_color ) );
+		$css .= sprintf( '%s{ background-color: %s }', $css_selector['secondary_color_background'], esc_attr( $secondary_color ) );
+		$css .= sprintf( '%s{ color: %s }', $css_selector['secondary_color_text'], esc_attr( $secondary_color ) );
 	}
 
 	if ( get_theme_mod( 'post_date', $setting['post_date'] ) == false ) {

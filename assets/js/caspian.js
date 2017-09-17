@@ -306,7 +306,7 @@
 				}
 
 			});
-		})
+		});
 
 	}
 
@@ -362,7 +362,7 @@
 			//	columnWidth: '.gallery-item'
 			//});
 
-		})
+		});
 
 		$(window).scroll(function () {
 		    if ($(this).scrollTop() > 720) {
