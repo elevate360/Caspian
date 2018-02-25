@@ -1,3 +1,64 @@
+(function ($) {
+
+	$.fn.parallax = function () {
+		var window_width = $(window).width();
+		// Parallax Scripts
+		return this.each(function() {
+			var $this = $(this);
+			$this.addClass('parallax');
+
+			function updateParallax(initial) {
+				var container_height;
+				if (window_width < 601) {
+					container_height = ($this.height() > 0) ? $this.height() : $this.children('img').height();
+				}
+				else {
+					container_height = ($this.height() > 0) ? $this.height() : 500;
+				}
+				var $img = $this.children('img').first();
+				var img_height = $img.height();
+				var parallax_dist = img_height - container_height;
+				var bottom = $this.offset().top + container_height;
+				var top = $this.offset().top;
+				var scrollTop = $(window).scrollTop();
+				var windowHeight = window.innerHeight;
+				var windowBottom = scrollTop + windowHeight;
+				var percentScrolled = (windowBottom - top) / (container_height + windowHeight);
+				var parallax = Math.round((parallax_dist * percentScrolled));
+
+				if (initial) {
+					$img.css('display', 'block');
+				}
+				if ((bottom > scrollTop) && (top < (scrollTop + windowHeight))) {
+					$img.css('transform', 'translate3D(-50%,' + parallax + 'px, 0)');
+				}
+
+			}
+
+			// Wait for image load
+			$this.children('img').one('load', function() {
+				updateParallax(true);
+			}).each(function() {
+				if (this.complete) {
+					$(this).trigger('load');
+				}
+			});
+
+			$(window).scroll(function() {
+				window_width = $(window).width();
+				updateParallax(false);
+			});
+
+			$(window).resize(function() {
+				window_width = $(window).width();
+				updateParallax(false);
+			});
+
+		});
+
+	};
+}( jQuery ));
+
 /**
  * File skip-link-focus-fix.js.
  *
@@ -29,7 +90,6 @@
 		}, false );
 	}
 } )();
-
 /**
  * File navigation.js.
  *
@@ -136,92 +196,64 @@
 		}
 	}( container ) );
 } )();
-
-(function ($) {
-
-  $.fn.parallax = function () {
-    var window_width = $(window).width();
-    // Parallax Scripts
-    return this.each(function() {
-      var $this = $(this);
-      $this.addClass('parallax');
-
-      function updateParallax(initial) {
-        var container_height;
-        if (window_width < 601) {
-          container_height = ($this.height() > 0) ? $this.height() : $this.children('img').height();
-        }
-        else {
-          container_height = ($this.height() > 0) ? $this.height() : 500;
-        }
-        var $img = $this.children('img').first();
-        var img_height = $img.height();
-        var parallax_dist = img_height - container_height;
-        var bottom = $this.offset().top + container_height;
-        var top = $this.offset().top;
-        var scrollTop = $(window).scrollTop();
-        var windowHeight = window.innerHeight;
-        var windowBottom = scrollTop + windowHeight;
-        var percentScrolled = (windowBottom - top) / (container_height + windowHeight);
-        var parallax = Math.round((parallax_dist * percentScrolled));
-
-        if (initial) {
-          $img.css('display', 'block');
-        }
-        if ((bottom > scrollTop) && (top < (scrollTop + windowHeight))) {
-          $img.css('transform', 'translate3D(-50%,' + parallax + 'px, 0)');
-        }
-
-      }
-
-      // Wait for image load
-      $this.children('img').one('load', function() {
-        updateParallax(true);
-      }).each(function() {
-        if (this.complete) {
-        	$(this).trigger('load');
-        }
-      });
-
-      $(window).scroll(function() {
-        window_width = $(window).width();
-        updateParallax(false);
-      });
-
-      $(window).resize(function() {
-        window_width = $(window).width();
-        updateParallax(false);
-      });
-
-    });
-
-  };
-}( jQuery ));
-
-
-/**
- * [description]
- * @param  {[type]} $ [description]
- * @return {[type]}   [description]
- */
 ( function( $ ) {
 
-	// Variables and DOM Caching.
-	var $body = $( 'body' ),
-	$page = $( '#page' ),
-	$parallax = $( '.wp-custom-header' ),
-	$mainNav = $( '.main-navigation' ),
-	$smoothScroll = $( 'a[href*="#content"], a[href*="#site-navigation"], a[href*="#secondary"], a[href*="#page"]' ),
-	$table = $( 'table' ),
-	$subMenu = $( '.main-navigation .sub-menu' ),
-	$subMenuToggle = $( '.sub-menu-toggle' ),
-	$entryGallery = $( '.entry-gallery' ),
-	$masonryGallery = $( '.gallery' ),
-	$footerWidgets = $( '.footer-widgets' ),
-	$returnTop = $('.return-to-top');
+	var caspian = caspian || {};
 
-	// Smooth scroll
-	function smoothScroll(){
+	caspian.init = function() {
+
+		caspian.$body 	= $( document.body );
+		caspian.$window = $( window );
+		caspian.$html 	= $( 'html' );
+		caspian.$footerWidgets = $( '.footer-widgets' );
+
+		this.inlineSVG();
+		this.fitVids();
+		this.responsiveTable();
+		this.smoothScroll();
+		this.parallax();
+		this.stickit();
+		this.subMenuToggle();
+		this.gallery();
+		this.masonry();
+		this.returnToTop();
+		this.bind();
+
+	};
+
+	caspian.supportsInlineSVG = function() {
+
+		var div = document.createElement( 'div' );
+		div.innerHTML = '<svg/>';
+		return 'http://www.w3.org/2000/svg' === ( 'undefined' !== typeof SVGRect && div.firstChild && div.firstChild.namespaceURI );
+
+	};
+
+	caspian.inlineSVG = function() {
+
+		if ( true === caspian.supportsInlineSVG() ) {
+			document.documentElement.className = document.documentElement.className.replace( /(\s*)no-svg(\s*)/, '$1svg$2' );
+		}
+
+	};
+
+	caspian.fitVids = function() {
+
+		$( '#page' ).fitVids({
+			customSelector: 'iframe[src^="https://videopress.com"]'
+		});
+
+	};
+
+	caspian.responsiveTable = function() {
+		$table = $( 'table' );
+		$table.wrap( '<div class="table-responsive"></div>' );
+	};
+
+	caspian.smoothScroll = function() {
+
+		$smoothScroll = $( 'a[href*="#content"], a[href*="#site-navigation"], a[href*="#secondary"], a[href*="#page"]' ),
+
 		$smoothScroll.click(function(event) {
 	        // On-page links
 	        if (
@@ -245,32 +277,60 @@
 	                    if ($target.is(':focus')) { // Checking if the target was focused
 	                        return false;
 	                    } else {
-	                        $target.attr('tabindex', '-1'); // Adding tabindex for elements not focusable
+	                        $target.attr( 'tabindex', '-1' ); // Adding tabindex for elements not focusable
 	                        $target.focus(); // Set focus again
 	                    }
 	                });
 	            }
 	        }
 		});
-	}
 
-	/*
-	 * Test if inline SVGs are supported.
-	 * @link https://github.com/Modernizr/Modernizr/
-	 */
-	function supportsInlineSVG() {
-		var div = document.createElement( 'div' );
-		div.innerHTML = '<svg/>';
-		return 'http://www.w3.org/2000/svg' === ( 'undefined' !== typeof SVGRect && div.firstChild && div.firstChild.namespaceURI );
-	}
+	};
 
-	function runFitVids(){
-		$page.fitVids({
-			customSelector: 'iframe[src^="https://videopress.com"]'
+	caspian.parallax = function() {
+
+		$parallax = $( '.wp-custom-header' );
+
+		$parallax.parallax();
+
+	};
+
+	caspian.stickit = function() {
+
+		$mainNav = $( '.main-navigation' );
+
+		$mainNav.stickit({
+			screenMinWidth: 782,
+			zIndex: 5
 		});
-	}
 
-	function runGallery(){
+	};
+
+	caspian.subMenuToggle = function() {
+
+		$subMenu = $( '.main-navigation .sub-menu' );
+
+		$subMenu.before( '<button class="sub-menu-toggle" role="button" aria-expanded="false">' + Caspianl10n.expandMenu + Caspianl10n.collapseMenu + Caspianl10n.subNav + '</button>' );
+		$( '.sub-menu-toggle' ).on( 'click', function( e ) {
+
+			e.preventDefault();
+
+			var $this = $( this );
+			$this.attr( 'aria-expanded', function( index, value ) {
+				return 'false' === value ? 'true' : 'false';
+			});
+
+			// Add class to toggled menu
+			$this.toggleClass( 'toggled' );
+			$this.next( '.sub-menu' ).slideToggle( 0 );
+
+		});
+
+	};
+
+	caspian.gallery = function() {
+
+		$entryGallery = $( '.entry-gallery' );
 
 		$entryGallery.each( function() {
 
@@ -308,61 +368,25 @@
 			});
 		});
 
-	}
+	};
 
-	$( document ).ready( function() {
+	caspian.masonry = function() {
 
-		if ( true === supportsInlineSVG() ) {
-			document.documentElement.className = document.documentElement.className.replace( /(\s*)no-svg(\s*)/, '$1svg$2' );
-		}
-
-		$subMenu.before( '<button class="sub-menu-toggle" role="button" aria-expanded="false">' + Caspianl10n.expandMenu + Caspianl10n.collapseMenu + Caspianl10n.subNav + '</button>' );
-		$( '.sub-menu-toggle' ).on( 'click', function( e ) {
-
-			e.preventDefault();
-
-			var $this = $( this );
-			$this.attr( 'aria-expanded', function( index, value ) {
-				return 'false' === value ? 'true' : 'false';
-			});
-
-			// Add class to toggled menu
-			$this.toggleClass( 'toggled' );
-			$this.next( '.sub-menu' ).slideToggle( 0 );
-
-		});
-
-		// Wrap table with div
-		$table.wrap( '<div class="table-responsive"></div>' );
-
-		runFitVids();
-
-		smoothScroll();
-
-		$parallax.parallax();
-
-		runGallery();
-
-		// Run stickit
-		$mainNav.stickit({
-			screenMinWidth: 782,
-			zIndex: 5
-		});
-
-		$footerWidgets.masonry({
+		caspian.$footerWidgets.masonry({
 			itemSelector: '.widget',
 			columnWidth: '.widget'
 		});
 
-		$masonryGallery.each( function() {
-
-			//var galleryID = $(this).attr('id');
-			//$( '#'+ galleryID ).masonry({
-			//	itemSelector: '.gallery-item',
-			//	columnWidth: '.gallery-item'
-			//});
-
+		$( window ).load(function(){
+	        caspian.$footerWidgets.masonry( 'reloadItems' );
+	        caspian.$footerWidgets.masonry( 'layout' );
 		});
+
+	};
+
+	caspian.returnToTop = function() {
+
+		$returnTop = $( '.return-to-top' );
 
 		$(window).scroll(function () {
 		    if ($(this).scrollTop() > 720) {
@@ -373,20 +397,30 @@
 		    }
 		});
 
+	};
+
+	caspian.bind = function() {
+
+		caspian.$body.on( 'post-load', function () {
+			caspian.fitVids();
+			caspian.gallery();
+		});
+
+		caspian.$window.load(function(){
+	        caspian.$footerWidgets.masonry( 'reloadItems' );
+	        caspian.$footerWidgets.masonry( 'layout' );
+		});
+
+		caspian.$body.on( 'wp-custom-header-video-loaded', function() {
+			$body.addClass( 'has-header-video' );
+		});
+
+	};
+
+	/** Initialize caspian.init() */
+	$( function() {
+		caspian.init();
 	});
 
-	$( window ).load(function(){
-        $footerWidgets.masonry( 'reloadItems' );
-        $footerWidgets.masonry( 'layout' );
-	});
-
-	$( document ).on( 'wp-custom-header-video-loaded', function() {
-		$body.addClass( 'has-header-video' );
-	});
-
-	$( document.body ).on( 'post-load', function () {
-		runFitVids();
-		runGallery();
-	});
 
 } )( jQuery );

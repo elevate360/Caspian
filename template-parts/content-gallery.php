@@ -32,8 +32,10 @@
 		endif;
 
 		$gallery = get_post_gallery( get_the_ID(), false );
-		$ids = explode( ",", $gallery['ids'] );
-		if ( ! is_singular() && ! post_password_required() && !empty( $gallery ) ) {
+		if ( isset( $gallery['ids'] ) ) {
+			$ids = explode( ",", $gallery['ids'] );
+		}
+		if ( ! is_singular() && ! post_password_required() && isset( $gallery['ids'] ) ) {
 			echo '<div class="entry-media">';
 				echo '<div id="gallery-'. get_the_id() .'" class="entry-gallery">';
 				foreach( $ids as $id ) {

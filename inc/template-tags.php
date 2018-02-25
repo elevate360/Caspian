@@ -200,8 +200,9 @@ if( ! function_exists( 'caspian_do_footer_copyright' ) ) :
 function caspian_do_footer_copyright(){
 
 	echo '<div class="site-info">'. caspian_get_footer_copyright() . '</div>';
-	echo '<div class="site-designer">'. sprintf( __( 'Theme design by %s.', 'caspian' ), '<a href="'. esc_url( 'https://elevate360.com.au/' ) .'">Elevate</a>' ) .'</div>';
-
+	if ( get_theme_mod( 'theme_designer', true )  == true ) {
+		echo '<div class="site-designer">'. sprintf( __( 'Theme design by %s %s.', 'caspian' ), caspian_get_svg( array( 'icon' => 'campaignkit' ) ),'<a href="'. esc_url( 'https://campaignkit.co/' ) .'">Campaign Kit</a>' ) .'</div>';
+	}
 }
 endif;
 
@@ -211,7 +212,7 @@ if ( ! function_exists( 'caspian_return_to_top' ) ) :
  * @return string
  */
 function caspian_return_to_top(){
-	if( get_theme_mod( 'return_to_top', true ) ) {
+	if( get_theme_mod( 'return_top', true ) ) {
 		echo '<a href="#page" class="return-to-top">'. caspian_get_svg( array( 'icon' => 'top' ) ) .'</a>';
 	}
 }

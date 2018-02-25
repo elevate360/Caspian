@@ -45,7 +45,7 @@ module.exports = function (grunt) {
 				type: 'wp-theme',
 				domainPath: 'languages',
 				potHeaders: {
-					'report-msgid-bugs-to': 'https://github.com/elevate360/caspian/issues',
+					'report-msgid-bugs-to': 'https://elevate360/contact',
 					'language-team': 'LANGUAGE <EMAIL@ADDRESS>'
 				}
 			},
@@ -65,13 +65,25 @@ module.exports = function (grunt) {
 		sass: {
 			dist: {
 				options: {
-					require: 'susy',
 					sourceMap: false
 				},
 				files: [{
 					'style.css': 'sass/style.scss',
 					'assets/css/editor-style.css': 'sass/editor-style.scss'
 				}]
+			}
+		},
+
+		cmq: {
+			options: {
+				compress: false,
+				logFile: false
+			},
+			media: {
+				files: {
+					'style.css': ['style.css'],
+					'assets/css/editor-style.css': ['assets/css/editor-style.css']
+				}
 			}
 		},
 
@@ -89,7 +101,7 @@ module.exports = function (grunt) {
 					})
 				]
 			},
-			main: {
+			theme: {
 				src: 'style.css',
 				dest: 'style.css'
 			},
@@ -116,14 +128,17 @@ module.exports = function (grunt) {
 				files: [{
 					expand: true,
 					cwd: './',
-					src: ['assets/css/*.css', '!assets/css/*.min.css'],
+					src: [
+						'./*.css',
+						'!./*.min.css',
+						'assets/css/*.css',
+						'!assets/css/*.min.css'],
 					dest: './',
 					ext: '.min.css'
 				}]
 			}
 		},
 
-		// JavaScript linting with JSHint.
 		jshint: {
 			options: {
 				jshintrc: '.jshintrc'
@@ -135,11 +150,18 @@ module.exports = function (grunt) {
 			]
 		},
 
+		concat: {
+			frontend: {
+				src: ['assets/js/frontend/parallax.js', 'assets/js/frontend/skip-link-focus-fix.js', 'assets/js/frontend/navigation.js', 'assets/js/frontend/frontend.js'],
+				dest: 'assets/js/frontend.js'
+			}
+		},
+
 		uglify: {
 			options: {
 				preserveComments: 'some'
 			},
-			theme: {
+			js: {
 				files: [{
 					expand: true,
 					cwd: 'assets/js/',
@@ -156,47 +178,34 @@ module.exports = function (grunt) {
 		watch: {
 			css: {
 				files: [
-					'sass/style.scss',
-					'sass/editor-style.scss',
-					'sass/elements/*.scss',
-					'sass/forms/*.scss',
-					'sass/layout/*.scss',
-					'sass/layout/*-*.scss',
-					'sass/media/*.scss',
-					'sass/mixins/*.scss',
-					'sass/modules/*.scss',
-					'sass/navigation/*.scss',
-					'sass/navigation/*-*.scss',
-					'sass/site/*.scss',
-					'sass/site/**/*.scss',
-					'sass/typography/*.scss',
-					'sass/variables-site/*.scss'
+					'sass/*.scss',
+					'sass/*/*.scss',
+					'sass/*/*/*.scss',
+					'sass/*/*/*/*.scss'
 				],
 				tasks: [
-					'sass'
+					'sass',
+					'cssmin'
+				]
+			},
+			frontend: {
+				files: [
+					'assets/js/frontend/*.js'
+				],
+				tasks: [
+					'concat',
+					'uglify'
 				]
 			},
 			js: {
 				files: [
-					'assets/js/<%= pkg.name %>.js',
-					'assets/js/customizer.js'
+					'assets/js/customizer.js',
+					'assets/js/customizer-control.js',
 				],
 				tasks: [
 					'uglify'
 				]
 			}
-		},
-
-		browserSync: {
-		    dev: {
-		        bsFiles: {
-		            src: ['style.css', 'assets/**/**', '**/*.php']
-		        },
-		        options: {
-		        	watchTask: true,
-		            proxy: 'localhost/elevate/<%= pkg.name %>'
-		        }
-		    }
 		},
 
 		// Replace text
@@ -261,10 +270,11 @@ module.exports = function (grunt) {
 	});
 
 	grunt.loadNpmTasks( 'grunt-postcss' );
-	grunt.loadNpmTasks( 'grunt-browser-sync' );
     grunt.loadNpmTasks( 'grunt-checktextdomain' );
+    grunt.loadNpmTasks( 'grunt-combine-media-queries' );
     grunt.loadNpmTasks( 'grunt-contrib-clean' );
     grunt.loadNpmTasks( 'grunt-contrib-compress' );
+    grunt.loadNpmTasks( 'grunt-contrib-concat' );
     grunt.loadNpmTasks( 'grunt-contrib-copy' );
     grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
     grunt.loadNpmTasks( 'grunt-contrib-jshint' );
@@ -275,13 +285,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks( 'grunt-wp-css' );
     grunt.loadNpmTasks( 'grunt-wp-i18n' );
 
-	grunt.registerTask( 'default', [
-		'browserSync',
-		'watch'
-	]);
-
 	grunt.registerTask( 'css', [
 		'sass',
+		'cmq',
 		'postcss',
 		'wpcss',
 		'cssmin'
@@ -290,6 +296,7 @@ module.exports = function (grunt) {
 	grunt.registerTask( 'dist', [
 		'replace',
 		'css',
+		'makepot',
 		'uglify',
 		'clean',
 		'copy',

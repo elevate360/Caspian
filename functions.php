@@ -214,32 +214,33 @@ add_filter( 'wp_resource_hints', 'caspian_resource_hints', 10, 2 );
  */
 function caspian_scripts() {
 
-	wp_dequeue_style( 'contact-form-7' );
-
 	// Add custom fonts, used in the main stylesheet.
 	if ( ! class_exists( 'Easy_Google_Fonts' ) ) {
 		wp_enqueue_style( 'caspian-fonts', caspian_fonts_url(), array(), null );
 	}
 
-	wp_enqueue_style( 'caspian-style', get_stylesheet_uri() );
+	$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-	wp_enqueue_script( 'html5', get_theme_file_uri( '/assets/vendor/js/html5.js' ), array(), '3.7.3' );
-	wp_script_add_data( 'html5', 'conditional', 'lt IE 9' );
+	wp_dequeue_style( 'contact-form-7' );
 
-	wp_enqueue_script( 'respond', get_theme_file_uri( '/assets/vendor/js/respond.js' ), array(), '1.4.2' );
+	/** Styles */
+	wp_enqueue_style( 'arctic-style', get_theme_file_uri( "/style$suffix.css" ) );
+
+	/** lt IE 9 script */
+	wp_enqueue_script( 'html5shiv', get_theme_file_uri( "/assets/js/ie/html5shiv$suffix.js" ), array(), '3.7.3' );
+	wp_script_add_data( 'html5shiv', 'conditional', 'lt IE 9' );
+	wp_enqueue_script( 'respond', get_theme_file_uri( "/assets/js/ie/respond$suffix.js" ), array(), '1.4.2' );
 	wp_script_add_data( 'respond', 'conditional', 'lt IE 9' );
-
-	wp_enqueue_script( 'nwmatcher', get_theme_file_uri( '/assets/vendor/js/nwmatcher.js' ), array(), '1.4.1' );
+	wp_enqueue_script( 'nwmatcher', get_theme_file_uri( "/assets/js/ie/nwmatcher$suffix.js" ), array(), '1.4.2' );
 	wp_script_add_data( 'nwmatcher', 'conditional', 'lt IE 9' );
-
-	wp_enqueue_script( 'selectivizr', get_theme_file_uri( '/assets/vendor/js/selectivizr.js' ), array(), '1.0.2' );
+	wp_enqueue_script( 'selectivizr', get_theme_file_uri( "/assets/js/ie/selectivizr$suffix.js" ), array(), '1.0.2' );
 	wp_script_add_data( 'selectivizr', 'conditional', 'lt IE 9' );
 
 	wp_enqueue_script( 'jquery-fitvids', get_template_directory_uri() . '/assets/js/fitvids/jquery.fitvids.min.js', array( 'jquery' ), '1.2.0', true );
 	wp_enqueue_script( 'jquery-stickit', get_template_directory_uri() . '/assets/js/stickit/jquery.stickit.min.js', array( 'jquery' ), '0.2.13', true );
 	wp_enqueue_script( 'jquery-magnific-popup', get_template_directory_uri() . '/assets/js/magnific-popup/jquery.magnific-popup.min.js', array( 'jquery' ), '1.1.0', true );
 	wp_enqueue_script( 'jquery-justified-gallery', get_template_directory_uri() . '/assets/js/justified-gallery/jquery.justifiedGallery.min.js', array( 'jquery' ), '3.6.3', true );
-	wp_enqueue_script( 'caspian-script', get_template_directory_uri() . '/assets/js/caspian.min.js', array( 'jquery', 'jquery-masonry' ), '20151215', true );
+	wp_enqueue_script( 'caspian-script', get_template_directory_uri() . '/assets/js/frontend.min.js', array( 'jquery', 'jquery-masonry' ), '20151215', true );
 
 	$output = array(
 		'expandMenu' 	=> caspian_get_svg( array( 'icon' => 'expand' ) ),

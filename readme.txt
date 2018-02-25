@@ -2,8 +2,8 @@
 
 Contributors: elevate360
 Requires at least: 4.7
-Tested up to: 4.8
-Stable tag: 1.1.0
+Tested up to: 4.9
+Stable tag: 1.0.0
 Version: 1.2
 License: GNU General Public License v2 or later
 License URI: LICENSE

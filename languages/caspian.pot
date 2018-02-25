@@ -1,17 +1,17 @@
-# <!=Copyright (C) 2017 Elevate360
+# <!=Copyright (C) 2018 Elevate360
 # This file is distributed under the GNU General Public License v2 or later.=!>
 msgid ""
 msgstr ""
 "Project-Id-Version: Caspian 1.0.0\n"
-"Report-Msgid-Bugs-To: https://github.com/elevate360/caspian/issues\n"
-"POT-Creation-Date: 2017-09-17 21:22:22+00:00\n"
+"Report-Msgid-Bugs-To: https://elevate360/contact\n"
+"POT-Creation-Date: 2018-02-25 16:32:38+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
-"X-Generator: grunt-wp-i18n1.0.0\n"
+"X-Generator: grunt-wp-i18n1.0.1\n"
 
 #: 404.php:17
 msgid "Oops! That page can&rsquo;t be found."
@@ -64,11 +64,11 @@ msgstr ""
 msgid "Add widgets here."
 msgstr ""
 
-#: functions.php:247
+#: functions.php:248
 msgid "Sub Navigation"
 msgstr ""
 
-#: functions.php:248
+#: functions.php:249
 msgid "Image Source &rarr;"
 msgstr ""
 
@@ -106,76 +106,92 @@ msgstr ""
 msgid "Theme Settings"
 msgstr ""
 
-#: inc/customizer/settings.php:44
+#: inc/customizer/settings.php:40
+msgid "Campaign Kit"
+msgstr ""
+
+#: inc/customizer/settings.php:41
+msgid "Learn More"
+msgstr ""
+
+#: inc/customizer/settings.php:58
 msgid "Link Color"
 msgstr ""
 
-#: inc/customizer/settings.php:45
+#: inc/customizer/settings.php:59
 msgid "Used for link, button, selection."
 msgstr ""
 
-#: inc/customizer/settings.php:62
+#: inc/customizer/settings.php:76
 msgid "Hover Color"
 msgstr ""
 
-#: inc/customizer/settings.php:63
+#: inc/customizer/settings.php:77
 msgid "Used for link:hover, button:hover."
 msgstr ""
 
-#: inc/customizer/settings.php:73
+#: inc/customizer/settings.php:87
 msgid "Blog Setting"
 msgstr ""
 
-#: inc/customizer/settings.php:89
+#: inc/customizer/settings.php:103
 msgid "Display Post Date"
 msgstr ""
 
-#: inc/customizer/settings.php:107
+#: inc/customizer/settings.php:121
 msgid "Display Post Author"
 msgstr ""
 
-#: inc/customizer/settings.php:125
+#: inc/customizer/settings.php:139
 msgid "Display Post Category"
 msgstr ""
 
-#: inc/customizer/settings.php:143
+#: inc/customizer/settings.php:157
 msgid "Display Post Tag"
 msgstr ""
 
-#: inc/customizer/settings.php:161
+#: inc/customizer/settings.php:175
 msgid "Display comments count"
 msgstr ""
 
-#: inc/customizer/settings.php:179
+#: inc/customizer/settings.php:193
 msgid "Display Author biography at single post"
 msgstr ""
 
-#: inc/customizer/settings.php:196
+#: inc/customizer/settings.php:210
 msgid "Excerpt length"
 msgstr ""
 
-#: inc/customizer/settings.php:217
+#: inc/customizer/settings.php:231
 msgid "Posts Navigation"
 msgstr ""
 
-#: inc/customizer/settings.php:222
+#: inc/customizer/settings.php:236
 msgid "Prev / Next"
 msgstr ""
 
-#: inc/customizer/settings.php:223
+#: inc/customizer/settings.php:237
 msgid "Numeric"
 msgstr ""
 
-#: inc/customizer/settings.php:231
+#: inc/customizer/settings.php:245
 msgid "Footer"
 msgstr ""
 
-#: inc/customizer/settings.php:247
+#: inc/customizer/settings.php:261
 msgid "Footer copyright"
 msgstr ""
 
-#: inc/customizer/settings.php:248
+#: inc/customizer/settings.php:262
 msgid "Use [YEAR] for dynamic current year. Use [SITE] to render site link."
+msgstr ""
+
+#: inc/customizer/settings.php:280
+msgid "Display theme designer at footer?"
+msgstr ""
+
+#: inc/customizer/settings.php:298
+msgid "Enable return to top link"
 msgstr ""
 
 #: inc/icon-functions.php:37
@@ -262,8 +278,8 @@ msgstr ""
 msgid "Y"
 msgstr ""
 
-#: inc/template-tags.php:203
-msgid "Theme design by %s."
+#: inc/template-tags.php:204
+msgid "Theme design by %s %s."
 msgstr ""
 
 #: inc/vendor/class-tgm-plugin-activation.php:327
@@ -641,14 +657,14 @@ msgstr ""
 msgid "About The Author"
 msgstr ""
 
-#: template-parts/content-audio.php:49 template-parts/content-gallery.php:58
+#: template-parts/content-audio.php:49 template-parts/content-gallery.php:60
 #: template-parts/content-link.php:47 template-parts/content-quote.php:31
 #: template-parts/content-video.php:51 template-parts/content.php:45
 #. translators: %s: Name of current post. Only visible to screen readers
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr ""
 
-#: template-parts/content-audio.php:60 template-parts/content-gallery.php:69
+#: template-parts/content-audio.php:60 template-parts/content-gallery.php:71
 #: template-parts/content-image.php:32 template-parts/content-link.php:58
 #: template-parts/content-page.php:22 template-parts/content-quote.php:42
 #: template-parts/content-video.php:62 template-parts/content.php:56

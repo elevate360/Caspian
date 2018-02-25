@@ -9,7 +9,10 @@
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
  */
 function caspian_customize_preview_js() {
-	wp_enqueue_script( 'caspian_customizer', get_template_directory_uri() . '/assets/js/customizer.min.js', array( 'customize-preview', 'customize-selective-refresh' ), '20151215', true );
+
+	$suffix = caspian_get_min_suffix();
+
+	wp_enqueue_script( 'caspian_customizer', get_template_directory_uri() . "/assets/js/customizer$suffix.js", array( 'customize-preview', 'customize-selective-refresh' ), '20151215', true );
 
 	$css_selector = caspian_css_color_selector();
 	$output = array(
@@ -23,6 +26,18 @@ function caspian_customize_preview_js() {
 
 }
 add_action( 'customize_preview_init', 'caspian_customize_preview_js' );
+
+/**
+ * Additional customizer control scripts.
+ */
+function caspian_customizer_control() {
+
+	$suffix = caspian_get_min_suffix();
+	wp_enqueue_style( 'caspian-customizer-control', get_parent_theme_file_uri( "/assets/css/customizer-control$suffix.css" ), array(), time(), 'all' );
+	wp_enqueue_script( 'caspian-customizer-control', get_parent_theme_file_uri( "/assets/js/customizer-control$suffix.js" ), array(), time(), true );
+
+}
+add_action( 'customize_controls_enqueue_scripts', 'caspian_customizer_control', 15 );
 
 /**
  * [caspian_setting_default description]
@@ -40,6 +55,8 @@ function caspian_setting_default(){
 		'author_display'	=> true,
 		'excerpt_length'	=> 20,
 		'posts_navigation'	=> 'posts_navigation',
+		'theme_designer'	=> true,
+		'return_to_top'		=> true,
 	);
 
 	return apply_filters( 'caspian_setting_default', $settings );

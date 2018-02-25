@@ -2,7 +2,7 @@
 
 **Contributors:** elevate360
 **Requires at least:** WordPress 4.7
-**Tested up to:** WordPress 4.8
+**Tested up to:** WordPress 4.9
 **Stable tag:** 1.0.0
 **Version:** 1.0.0
 **License:** GPLv2 or later
@@ -26,7 +26,7 @@ You can easily install and use Easy Google Fonts plugin.
 
 ## Copyright
 
-Caspian WordPress Theme, Copyright 2016 WordPress.org
+Caspian WordPress Theme, Copyright 2016 WordPress.org.
 Caspian is distributed under the terms of the GNU GPL
 
 Caspian bundles the following third-party resources:
